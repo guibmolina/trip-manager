@@ -1,0 +1,70 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: trip-manager-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./apps/:/var/www
+      - ./docker-compose/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - tripManager
+    depends_on:
+     - trip-manager-api
+     - trip-manager-frontend
+
+  trip-manager-api:
+    build:
+      args:
+        user: guilherme
+        uid: 1000
+      context: ./apps/trip-manager-api
+      dockerfile: Dockerfile
+    image: trip-manager-api
+    container_name: trip-manager-api
+    restart: unless-stopped
+    working_dir: /var/www/html/
+    volumes:
+      - ./apps/trip-manager-api:/var/www/html/
+    environment:
+      - "SERVICE_NAME=backend"
+      - "DB_PORT=3306"
+      - "DB_HOST=trip-manager-db"
+      - "DB_DATABASE=trip-manager"
+      - "DB_USERNAME=root"
+      - "DB_PASSWORD=root"
+    depends_on:
+      - db
+    networks: 
+      - tripManager
+      
+  trip-manager-frontend:
+    container_name: trip-manager-frontend
+    build:
+      context: ./apps/trip-manager-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./apps/trip-manager-frontend:/var/www/html/
+    networks:
+      - tripManager
+
+  db:
+    image: mariadb
+    container_name: trip-manager-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+
+    networks:
+      - tripManager
+
+networks:
+  tripManager:
+    driver: bridge
