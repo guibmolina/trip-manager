@@ -54,7 +54,7 @@ email: mary@example.com;
 senha: password;
 tipo: Solicitador;
 
-email: mary@example.com;
+email: mark@example.com;
 senha: password;
 tipo: Gerente;
 
