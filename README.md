@@ -44,3 +44,18 @@ docker exec -it trip-manager-api bash -c "composer install && php artisan key:ge
 
 `$ docker exec -it trip-manager-api php artisan test `
 
+
+### Contas de acesso
+email: james@example.com
+senha: password
+tipo: Solicitador
+
+email: mary@example.com
+senha: password
+tipo: Solicitador
+
+email: mary@example.com
+senha: password
+tipo: Gerente
+
+
