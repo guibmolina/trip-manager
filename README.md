@@ -5,7 +5,7 @@
 Faça o clone do repositório na sua máquina
 
 ```bash
-git clone git@github.com:guibmolina/TripManager.git
+git clone git@github.com:guibmolina/trip-manager.git
 ```
 
 ### Configuração do ambiente
