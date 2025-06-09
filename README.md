@@ -15,9 +15,10 @@ git clone git@github.com:guibmolina/trip-manager.git
 
 Dentro da pasta do projeto, rode o seguinte comando: `docker compose up -d --build`.
 
-Copie o arquivo `.env.example` e renomeie para `.env` dentro da pasta raíz da aplicação.
+Copie o arquivo `.env.example` e renomeie para `.env` dentro da pasta raíz da aplicação da api.
 
 ```bash
+cd apps/trip-manager-api/
 cp .env.example .env
 ```
 É no  `.env` que estão as configurações de ambiente para o envio de email, como teste, utilizei o serviço https://mailtrap.io/ que é bem fácil de configurar, só realizar o login no site e mudar as credenciais do`.env`. Como o exemplo a seguir:
