@@ -37,7 +37,7 @@ Após criar o arquivo `.env`, será necessário acessar o container da aplicaç�
 Digite o seguinte comando:
 
 ```bash
-docker exec -it trip-manager-api bash -c "composer install && php artisan key:generate && php artisan migrate && php artisan migrate --env=testing  && php artisan db:seed && php artisan jwt:secret && php artisan cache:clear"
+docker exec -it trip-manager-api bash -c "composer install && php artisan key:generate && php artisan migrate  && php artisan migrate --env=testing --force && php artisan db:seed && php artisan jwt:secret --force && php artisan cache:clear"
 ```
 
 ###  Testes
